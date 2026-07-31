@@ -617,114 +617,11 @@
       </div>
     </section>
 
-    <!-- Surprise Quizzes button at the bottom of the page -->
-    <button
-      class="cta-button quiz-nav-btn show-quiz-btn"
-      style="margin: 2.5rem auto 2.5rem auto; display: block"
-    >
-      Surprise Quizzes
-    </button>
+
     <script src="script.js"></script>
+  
     <script>
-      // Quiz page navigation logic for all Surprise Quizzes buttons
-      document.addEventListener("DOMContentLoaded", function () {
-        // Play music when Begin Our Journey button is clicked
-        const beginJourneyBtn = document.getElementById("begin-journey-btn");
-        const backgroundMusic = document.getElementById("background-music");
-
-        if (beginJourneyBtn && backgroundMusic) {
-          beginJourneyBtn.addEventListener("click", function () {
-            backgroundMusic.play().catch((error) => {
-              console.log("Audio playback failed:", error);
-            });
-          });
-        }
-
-        const quizBtns = document.querySelectorAll(".show-quiz-btn");
-        const quizSection = document.getElementById("page-quiz");
-        const homeSection = document.getElementById("page-home");
-        const backToHomeBtn = document.getElementById("back-to-home-btn");
-
-        // Hide the Surprise Quizzes button when on the quiz page
-        const hideQuizButtonOnQuizPage = function () {
-          const quizNavBtn = document.querySelector(".quiz-nav-btn");
-          if (quizNavBtn) {
-            quizNavBtn.style.display =
-              quizSection.style.display === "flex" ? "none" : "block";
-          }
-        };
-
-        // Show quiz page when quiz buttons are clicked
-        quizBtns.forEach((btn) => {
-          btn.addEventListener("click", function () {
-            document
-              .querySelectorAll(".page")
-              .forEach((p) => (p.style.display = "none"));
-            quizSection.style.display = "flex";
-            hideQuizButtonOnQuizPage();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          });
-        });
-
-        // Back to home button functionality
-        if (backToHomeBtn) {
-          backToHomeBtn.addEventListener("click", function () {
-            // Refresh the page to navigate to the home page
-            window.location.reload();
-          });
-        }
-      });
-    </script>
-    <script>
-      // Love Quiz Interactivity with unique success messages
-      (function () {
-        const quizBoxes = document.querySelectorAll(".quiz-box");
-        const successMessages = [
-          "Correct answer response 1",
-          "Correct answer response 2",
-          "Correct answer response 3",
-          "Correct answer response 4",
-          "Correct answer response 5",
-          "Correct answer response 6",
-        ];
-        quizBoxes.forEach((box, idx) => {
-          const inner = box.querySelector(".quiz-box-inner");
-          const front = box.querySelector(".quiz-box-front");
-          const back = box.querySelector(".quiz-box-back");
-          const input = box.querySelector(".quiz-input");
-          const submit = box.querySelector(".quiz-submit");
-          const hint = box.querySelector(".quiz-hint");
-          const success = box.querySelector(".quiz-success");
-          let attempts = 0;
-          front.addEventListener("click", () => {
-            box.classList.toggle("flipped");
-            input.focus();
-          });
-          submit.addEventListener("click", () => {
-            const answer = box.dataset.answer.trim().toLowerCase();
-            const user = input.value.trim().toLowerCase();
-            // Last quiz: accept any answer
-            if ((answer === "*" && user.length > 0) || user === answer) {
-              const customMsg = box.dataset.customSuccess;
-              success.innerHTML =
-                customMsg || successMessages[idx] || "Success msg 1";
-              hint.innerHTML = "";
-              box.classList.add("quiz-correct");
-              // Confetti effect
-              confettiEffect(box);
-              input.disabled = true;
-              submit.disabled = true;
-            } else {
-              attempts++;
-              if (attempts === 1) {
-                hint.innerHTML = box.dataset.hint;
-              } else {
-                hint.innerHTML = "Wrong answer 1";
-              }
-              success.innerHTML = "";
-            }
-          });
-        });
+    
         // Simple confetti effect
         function confettiEffect(box) {
           const confetti = document.createElement("div");
